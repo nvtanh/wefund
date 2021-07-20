@@ -1,0 +1,8 @@
+en:
+  hello: "Hello world"
+  controllers:
+    pitch_decks:
+      create:
+        success:
+          Your request to create a pitch deck was successful.
+          We'll notify you via email when the process of creating it is complete

@@ -1,0 +1,18 @@
+<h1>PitchDeck#New</h1>
+
+<%= form_for @pitch_deck do |f| %>
+  <div class='form-group'>
+    <%= f.label :title, class: 'form-label' %><br />
+    <%= f.text_field :title, autofocus: true, autocomplete: 'title', class: 'form-control' %>
+  </div>
+
+  <div class='form-group'>
+    <%= f.label :document, class: 'form-label' %><br />
+    <%= f.file_field :document, accept: 'application/pdf', class: 'form-control' %>
+  </div>
+
+  <div class='center'>
+    <%= f.submit 'Submit', class: 'btn btn-lg btn-primary' %>
+    <%= link_to 'Cancel', root_path, class: 'btn btn-lg btn-default' %>
+  </div>
+<% end %>

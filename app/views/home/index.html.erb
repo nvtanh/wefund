@@ -1,0 +1,26 @@
+<h1>Home#index</h1>
+
+<div class="row">
+  <%= link_to "Create new pitch deck", new_pitch_deck_path, class: "btn btn-primary" %>
+</div>
+
+<hr />
+
+<% if @pitch_deck.present? %>
+  <div class="row">
+    <h3><%= @pitch_deck.title %></h3>
+
+    <div class="row">
+      <% @pitch_deck.images.each do |img| %>
+        <figure>
+          <%= image_tag img %>
+        </figure>
+        <br />
+      <% end %>
+    </div>
+
+  </div>
+<% else %>
+  There aren't any pitch deck.
+  You can create a pitch deck <%= link_to "here", new_pitch_deck_path %>
+<% end %>
