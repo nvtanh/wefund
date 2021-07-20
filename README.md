@@ -1,24 +1,39 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Ruby version `2.7.2`
 
-Things you may want to cover:
+* How to run app
+1. Install Prerequisites
+  - Rmagick:
 
-* Ruby version
+    For ubuntu: https://github.com/rmagick/rmagick#ubuntu
+   
+    For MacOs: https://github.com/rmagick/rmagick#macos
 
-* System dependencies
+2. Bundle
+  ```
+    bundle install --path vendor/bundle
+  ```
 
-* Configuration
+3. Setup DB and seed data
+  ```
+    bundle exec rails db:drop db:create db:migrate db:seed
+  ```
 
-* Database creation
+4. Run server
+  ```ruby
+    ### Rails server
+    bundle exec rails s
 
-* Database initialization
+    ### Sidekiq server
+    bundle exec sidekiq default mailers
 
-* How to run the test suite
+    ### Mailcatcher server
+    bundle exec mailcatcher
+  ```
 
-* Services (job queues, cache servers, search engines, etc.)
+  Go to app at http://localhost:3000
+  
+  Login by email with format: test_#{i}@example.com with i is number from 0 to 9
 
-* Deployment instructions
-
-* ...
+  Note: To check email please go to http://127.0.0.1:1080/
