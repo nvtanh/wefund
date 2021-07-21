@@ -1,0 +1,12 @@
+<div class="row center">
+  <h2><%= @pitch_deck.title %></h2>
+
+  <hr />
+
+  <% @pitch_deck.images.each do |img| %>
+    <figure>
+      <%= image_tag img %>
+    </figure>
+    <br />
+  <% end %>
+</div>

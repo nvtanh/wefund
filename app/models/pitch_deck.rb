@@ -18,6 +18,8 @@ class PitchDeck < ApplicationRecord
 
   after_create :split_images_from_document
 
+  scope :newest, -> { order('id DESC') }
+
   private
 
   def split_images_from_document

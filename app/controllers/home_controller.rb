@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class HomeController < ApplicationController
-  before_action :load_resource
+  before_action :load_resources
 
   def index; end
 
   private
 
-  def load_resource
-    @pitch_deck ||= current_user.pitch_decks.finished.includes(images_attachments: :blob).last
+  def load_resources
+    @pitch_decks ||= current_user.pitch_decks.newest.includes(images_attachments: :blob)
   end
 end

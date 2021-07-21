@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :pitch_decks, only: %i[new create]
+  resources :pitch_decks, only: %i[new create show]
 end

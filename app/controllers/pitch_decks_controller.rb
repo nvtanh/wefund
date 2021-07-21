@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class PitchDecksController < ApplicationController
+  before_action :load_resource, only: :show
+
+  def show
+  end
+
   def new
     @pitch_deck ||= current_user.pitch_decks.new
   end
@@ -20,5 +25,12 @@ class PitchDecksController < ApplicationController
 
   def permit_params
     params.require(:pitch_deck).permit(:title, :document)
+  end
+
+  def load_resource
+    @pitch_deck ||= current_user.pitch_decks.find_by(id: params[:id])
+    return if @pitch_deck
+    flash[:danger] = "Pitch deck not found!"
+    redirect_to root_path
   end
 end

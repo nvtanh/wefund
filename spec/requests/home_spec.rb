@@ -12,28 +12,15 @@ RSpec.describe HomeController, type: :controller do
 
     context 'when login as an User' do
       let!(:user) { create(:user) }
+      let!(:pitch_deck) { create(:pitch_deck, :finished, user: user) }
 
-      before { sign_in(user) }
-
-      context 'when pitch_deck is exist' do
-        context 'when pitch deck has image_process is inprogress' do
-          let!(:pitch_deck) { create(:pitch_deck, :inprogress, user: user) }
-
-          before { get :index }
-
-          it { expect(response).to have_http_status(:success) }
-          it { expect(assigns(:pitch_deck)).to eq nil }
-        end
-
-        context 'when pitch deck has image_process is finished' do
-          let!(:pitch_deck) { create(:pitch_deck, :finished, user: user) }
-
-          before { get :index }
-
-          it { expect(response).to have_http_status(:success) }
-          it { expect(assigns(:pitch_deck)).to eq pitch_deck }
-        end
+      before do
+        sign_in(user)
+        get :index
       end
+
+      it { expect(response).to have_http_status(:success) }
+      it { expect(assigns(:pitch_decks)).to eq [pitch_deck] }
     end
   end
 end

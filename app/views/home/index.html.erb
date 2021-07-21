@@ -1,26 +1,43 @@
-<h1>Home#index</h1>
+<h1>Pitch Decks</h1>
 
 <div class="row">
   <%= link_to "Create new pitch deck", new_pitch_deck_path, class: "btn btn-primary" %>
+
+  <span style="color: red">
+    Auto refresh in <span id="countdown">30</span>s
+  </span>
 </div>
 
-<hr />
+<br />
 
-<% if @pitch_deck.present? %>
-  <div class="row">
-    <h3><%= @pitch_deck.title %></h3>
-
-    <div class="row">
-      <% @pitch_deck.images.each do |img| %>
-        <figure>
-          <%= image_tag img %>
-        </figure>
-        <br />
-      <% end %>
-    </div>
-
-  </div>
+<% if @pitch_decks.any? %>
+  <ul class="list-group list-group-flush" id="pitch-decks-list">
+    <% @pitch_decks.each do |pitch_deck| %>
+      <li class="list-group-item">
+        <% if pitch_deck.finished? %>
+          <%= link_to pitch_deck_path(pitch_deck) do %>
+            <%= pitch_deck.title %>
+          <% end %>
+        <% else %>
+          <%= pitch_deck.title %>
+        <% end %>
+        <span class="label <%= image_process_class(pitch_deck) %>"  style="float: right;"><%= pitch_deck.image_process %></span>
+      </li>
+    <% end %>
+  </ul>
 <% else %>
   There aren't any pitch deck.
   You can create a pitch deck <%= link_to "here", new_pitch_deck_path %>
 <% end %>
+
+<script>
+  var timeleft = 30;
+  var downloadTimer = setInterval(function(){
+    if(timeleft <= 0){
+      clearInterval(downloadTimer);
+      window.location.reload(true);
+    }
+    document.getElementById("countdown").innerHTML = timeleft;
+    timeleft -= 1;
+  }, 1000);
+</script>
