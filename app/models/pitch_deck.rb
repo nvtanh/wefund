@@ -23,6 +23,6 @@ class PitchDeck < ApplicationRecord
   private
 
   def split_images_from_document
-    SplitPitchDeckDocumentWorker.perform_async(id)
+    SplitPitchDeckDocumentWorker.perform_at(20.seconds.from_now, id)
   end
 end
